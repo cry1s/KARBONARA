@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/animePoster"
+        android:layout_width="100dp"
+        android:layout_height="144dp"
+        android:contentDescription='anime poster'
+        app:srcCompat="@drawable/poster"
+        tools:ignore="HardcodedText"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"/>
+
+
+    <TextView
+        android:id="@+id/readyStatus"
+        android:layout_alignParentEnd="true"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="[2 из 12]"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/title"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@id/animePoster"
+        android:layout_toStartOf="@id/readyStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        android:layout_marginTop="6dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/description"
+        android:layout_below="@id/title"
+        android:layout_toEndOf="@id/animePoster"
+        android:layout_marginStart="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginEnd="6dp"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+</RelativeLayout>
