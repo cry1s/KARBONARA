@@ -1,16 +1,13 @@
 package com.karbonara.karbonara.ui.main;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +32,9 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MainFragment extends Fragment {
     public static JSONObject table;
     public MainFragment() {
@@ -48,24 +48,17 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
-        AnimeAdapter adapter = new AnimeAdapter(this.getContext(), makeAnime());
-        ListView lv = view.findViewById(R.id.animeListView);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment newFragment = new TextFragment(Integer.toString(position));
-                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
 
-                // Замена контейнер в разметке на фрагмент
-                // и добавляем транзакцию в стек обратного вызова
-                transaction.replace(R.id.container, newFragment);
-                transaction.addToBackStack(null);
+        RecyclerView recyclerView = view.findViewById(R.id.animeRecView);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
 
-                // выполнение транзакции
-                transaction.commit();
-            }
-        });
+        ArrayList images = new ArrayList(Arrays.asList(makeAnime()));
+        AnimeAdapter adapter = new AnimeAdapter(getContext().getApplicationContext(), images);
+        recyclerView.setAdapter(adapter);
+        RecyclerView rv = view.findViewById(R.id.animeRecView);
+
         Log.i("AAAAAAAAAAAAAAAAAAAA", "OnCreateViewDone");
         return view;
     }
@@ -89,7 +82,8 @@ public class MainFragment extends Fragment {
                         k.getJSONObject(5).getInt("v"),
                         k.getJSONObject(6).getString("v"),
                         k.getJSONObject(7).getString("v"),
-                        k.getJSONObject(7).getString("v")
+                        k.getJSONObject(8).getString("v"),
+                        k.getJSONObject(9).getString("v")
                         );
                 arr[i] = anime;
                 System.out.println(anime.getTitle());

@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
-
-    <ListView
-        android:id="@+id/animeListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/animeRecView"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

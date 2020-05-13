@@ -1,13 +1,5 @@
 package com.karbonara.karbonara;
 
-import android.util.Log;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
-
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 
 public class Anime {
     public String poster;
@@ -18,10 +10,13 @@ public class Anime {
     public int id;
     public String titleRus;
     public String title2RUS;
-    public String[] listMembers;
+    public String listMembers;
     public String readyStatus = "";
+    public String statusSerii;
 
-    public Anime(int id, String title, String titleRus, String title2RUS, int readyEpisodes, int allEpisodes, String descriptionRus, String s, String poster) {
+    public Anime(int id, String title, String titleRus, String title2RUS, int readyEpisodes,
+                 int allEpisodes, String descriptionRus, String listMember, String poster,
+                 String statusSerii) {
         this.id = id;
         this.title = title;
         this.titleRus = titleRus;
@@ -30,10 +25,30 @@ public class Anime {
         this.readyEpisodes = readyEpisodes;
         this.allEpisodes = allEpisodes;
         if (readyEpisodes != allEpisodes) this.readyStatus = "[" + readyEpisodes + "/" + allEpisodes + "]";
+        else this.readyStatus = "Релиз";
         this.description = descriptionRus;
-        this.listMembers = s.split(", ");
+        this.listMembers = listMember;
         this.poster = poster;
+        switch (statusSerii) {
+            case "P":
+                this.statusSerii = "";
+                break;
+            case "О":
+                this.statusSerii = "На озвучке";
+                break;
+            case "ГT":
+                this.statusSerii = "На тайминге";
+                break;
+            case "ГВ":
+                this.statusSerii = "Выкладывается!";
+                break;
+            default:
+                this.statusSerii = "Неизвестно O_o";
+                break;
+        }
     }
+
+    //for test
     public Anime() {
         this.id = 1;
         this.title = "title";
@@ -45,7 +60,7 @@ public class Anime {
         this.allEpisodes = 12;
         this.readyStatus = "[" + readyEpisodes + "/" + allEpisodes + "]";
         this.description = "descriptionRus";
-        this.listMembers = new String[]{"s.split(", ")"};
+        this.listMembers = "AUTHORS";
     }
 
     public void updateReadyStatus() {

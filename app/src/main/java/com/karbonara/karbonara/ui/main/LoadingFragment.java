@@ -10,18 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.karbonara.karbonara.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,9 +20,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class LoadingFragment extends Fragment {
 
     public LoadingFragment() {
