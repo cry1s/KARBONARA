@@ -89,7 +89,7 @@ public class LoadingFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Fragment newFragment = (success ? new MainFragment(table) : new TextFragment(msg));
+            Fragment newFragment = (success ? new MainFragment(table,getActivity()) : new TextFragment(msg));
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             // Замена контейнер в разметке на фрагмент
             transaction.replace(R.id.container, newFragment);

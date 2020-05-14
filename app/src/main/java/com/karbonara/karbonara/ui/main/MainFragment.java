@@ -1,6 +1,7 @@
 package com.karbonara.karbonara.ui.main;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,11 +38,13 @@ import java.util.Arrays;
 
 public class MainFragment extends Fragment {
     public static JSONObject table;
+    private Context context;
     public MainFragment() {
     }
 
-    public MainFragment(JSONObject table) {
+    public MainFragment(JSONObject table, Context context) {
         MainFragment.table = table;
+        this.context = context;
     }
 
     @Override
@@ -51,11 +54,13 @@ public class MainFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.animeRecView);
         recyclerView.setHasFixedSize(true);
+
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext().getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
         ArrayList images = new ArrayList(Arrays.asList(makeAnime()));
-        AnimeAdapter adapter = new AnimeAdapter(getContext().getApplicationContext(), images);
+        AnimeAdapter adapter = new AnimeAdapter(getContext().getApplicationContext(), images,getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
         RecyclerView rv = view.findViewById(R.id.animeRecView);
 

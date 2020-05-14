@@ -31,10 +31,12 @@ import static com.karbonara.karbonara.ui.main.MainFragment.table;
 public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder>{
     private ArrayList<Anime> android_versions;
     private Context context;
+    FragmentManager fragmentManager;
 
-    public AnimeAdapter(Context context, ArrayList<Anime> android_versions) {
+    public AnimeAdapter(Context context, ArrayList<Anime> android_versions, FragmentManager fragmentManager) {
         this.context = context;
         this.android_versions = android_versions;
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
@@ -53,6 +55,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder>{
         viewHolder.title.setText(anime.titleRus);
         viewHolder.description.setText(anime.description);
         viewHolder.status.setText(anime.readyStatus);
+
         Picasso.with(context)
                 .load(anime.poster)
                 .resize(225, 322)
@@ -82,12 +85,18 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
-            Fragment newFragment = new AnimeFragment(android_versions.get(getAdapterPosition()));
-            FragmentTransaction transaction = beginTransaction(); //!!!!!!!!!!!!!!!!
+           // Fragment newFragment = new AnimeFragment(android_versions.get(getAdapterPosition()));
+          //  FragmentTransaction transaction = beginTransaction(); //!!!!!!!!!!!!!!!!
             // Замена контейнер в разметке на фрагмент
-            transaction.replace(R.id.container, newFragment);
+         //   transaction.replace(R.id.container, newFragment);
             // выполнение транзакции
-            transaction.commit();
+          //  transaction.commit();
+
+            Fragment newFragment = new AnimeFragment();
+            fragmentManager.beginTransaction().replace(R.id.container, newFragment).commit();
+
         }
+
     }
+
 }
