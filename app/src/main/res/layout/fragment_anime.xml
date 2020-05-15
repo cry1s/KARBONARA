@@ -1,49 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/browse_dummy"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/backPoster"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/titleDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                 />
-            <TextView
-                android:id="@+id/StatusSeriesDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <TextView
-            android:id="@+id/StatusNowDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/descriptionDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/authorsDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
+    <ImageView
+        android:id="@+id/backPoster"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="-9dp"
+        android:layout_marginEnd="-9dp"
+        android:foreground="@drawable/black_bottom"
+        android:foregroundGravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/titleDetails"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/backPoster"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="6dp"
+        android:layout_marginStart="6dp"
+        tools:text="VERY BIG TEXT VERY BIG TEXTVERY BIG TEXTVERY BIG TEXTVERY BIG TEXT" />
+
+    <TextView
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@id/titleDetails"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:textColor="#FFFFFF"
+        android:text="@string/xx_bp_xx"
+        android:id="@+id/StatusSeriesDetails"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/StatusNowDetails"
+        android:layout_below="@id/titleDetails"
+        android:text="Статус следующей серии: N"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="Над тайтлом работали: s1yrc, Veben8, Tulane, Vishenka, nice_color, unres, rain"
+        android:id="@+id/authorsDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_below="@id/StatusNowDetails" />
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:id="@+id/descriptionDetails"
+        android:text="давай, спасибо тебе большое
+Иван
+Иван 18:27
+
+Если с чем-то надо помочь, то говори, обязательно помогу
+Іван
+Іван 18:31
+
+ща доделаю лэйаут оценишь)00
+Иван
+Иван 18:31
+
+Ок)0)0)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/authorsDetails" />
+    <Button
+            android:layout_alignParentBottom="true"
             android:id="@+id/butWatch"
+            android:background="#DAC507"
             android:text="@string/watch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-</FrameLayout>
+            android:layout_height="70dp"/>
+</RelativeLayout>

@@ -3,6 +3,7 @@ package com.karbonara.karbonara;
 
 public class Anime {
     public String poster;
+    public String posterHor;
     public String title;
     public int readyEpisodes;
     public int allEpisodes;
@@ -13,10 +14,11 @@ public class Anime {
     public String listMembers;
     public String readyStatus = "";
     public String statusSerii;
+    public String[] episodes;
 
     public Anime(int id, String title, String titleRus, String title2RUS, int readyEpisodes,
                  int allEpisodes, String descriptionRus, String listMember, String poster,
-                 String statusSerii) {
+                 String statusSerii, String episodes, String posterHor) {
         this.id = id;
         this.title = title;
         this.titleRus = titleRus;
@@ -24,11 +26,11 @@ public class Anime {
         else this.title2RUS = null;
         this.readyEpisodes = readyEpisodes;
         this.allEpisodes = allEpisodes;
-        if (readyEpisodes != allEpisodes) this.readyStatus = "[" + readyEpisodes + "/" + allEpisodes + "]";
-        else this.readyStatus = "Релиз";
+        this.readyStatus = "[" + readyEpisodes + " из " + allEpisodes + "]";
         this.description = descriptionRus;
         this.listMembers = listMember;
         this.poster = poster;
+        this.posterHor = posterHor;
         switch (statusSerii) {
             case "P":
                 this.statusSerii = "";
@@ -46,9 +48,9 @@ public class Anime {
                 this.statusSerii = "Неизвестно O_o";
                 break;
         }
+        this.episodes = episodes.split(", ");
     }
 
-    //for test
     public Anime() {
         this.id = 1;
         this.title = "title";
@@ -63,10 +65,14 @@ public class Anime {
         this.listMembers = "AUTHORS";
     }
 
-    public void updateReadyStatus() {
-        this.readyStatus = "[" + readyEpisodes + "/" + allEpisodes + "]";
+    public String getShortDescription() {
+        int maxNSim = 147;
+        if (description.length() <= maxNSim) {
+            return description;
+        } else {
+            return description.substring(0, maxNSim) + "...";
+        }
     }
-
     public String getTitle() {
         return titleRus;
     }

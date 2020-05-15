@@ -1,4 +1,4 @@
-package com.karbonara.karbonara.ui.main;
+package com.karbonara.karbonara.ui.main.fragments;
 
 
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,24 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.karbonara.karbonara.Anime;
-import com.karbonara.karbonara.MainActivity;
 import com.karbonara.karbonara.R;
-import com.squareup.picasso.Picasso;
+import com.karbonara.karbonara.ui.main.dialogs.ErrorFragment;
+import com.karbonara.karbonara.ui.main.adapters.AnimeAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +31,7 @@ import java.util.Arrays;
 public class MainFragment extends Fragment {
     public static JSONObject table;
     private Context context;
+
     public MainFragment() {
     }
 
@@ -60,7 +53,7 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         ArrayList images = new ArrayList(Arrays.asList(makeAnime()));
-        AnimeAdapter adapter = new AnimeAdapter(getContext().getApplicationContext(), images,getActivity().getSupportFragmentManager());
+        AnimeAdapter adapter = new AnimeAdapter(getContext().getApplicationContext(), images, getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
         RecyclerView rv = view.findViewById(R.id.animeRecView);
 
@@ -88,14 +81,18 @@ public class MainFragment extends Fragment {
                         k.getJSONObject(6).getString("v"),
                         k.getJSONObject(7).getString("v"),
                         k.getJSONObject(8).getString("v"),
-                        k.getJSONObject(9).getString("v")
+                        k.getJSONObject(9).getString("v"),
+                        k.getJSONObject(10).getString("v"),
+                        k.getJSONObject(11).getString("v")
                         );
                 arr[i] = anime;
                 System.out.println(anime.getTitle());
             }
             return arr;
         } catch (JSONException e) {
-            Log.e("RRRRA", e.getMessage());
+            Log.e("RRRRA", e.getLocalizedMessage());
+            DialogFragment newFragment = new ErrorFragment(e.getLocalizedMessage());
+            newFragment.show(getParentFragmentManager(), "Error happened :c");
         }
         return new Anime[] {new Anime()};
     }

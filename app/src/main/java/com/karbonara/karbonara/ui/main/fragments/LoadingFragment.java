@@ -1,8 +1,9 @@
-package com.karbonara.karbonara.ui.main;
+package com.karbonara.karbonara.ui.main.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.karbonara.karbonara.R;
+import com.karbonara.karbonara.ui.main.dialogs.ErrorFragment;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -24,7 +27,6 @@ import java.net.URL;
 public class LoadingFragment extends Fragment {
 
     public LoadingFragment() {
-        // Required empty public constructor
     }
 
     public static Fragment newInstance() {
@@ -62,10 +64,12 @@ public class LoadingFragment extends Fragment {
                 int responseCode = conn.getResponseCode();
                 is = conn.getInputStream();
                 return convertStreamToString(is);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 success = false;
-                msg = e.getMessage();
+                msg = e.getLocalizedMessage();
                 Log.e("RRRR", e.getMessage(), e);
+                DialogFragment newFragment = new ErrorFragment(msg);
+                newFragment.show(getParentFragmentManager(), "Error happened :c");
             } finally {
                 if (is != null) {
                     try {
@@ -80,21 +84,28 @@ public class LoadingFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String r) {
-            int start = r.indexOf("{", r.indexOf("{") + 1);
-            int end = r.lastIndexOf("}");
-            String jsonResponse = r.substring(start, end);
             JSONObject table = null;
             try {
+                int start = r.indexOf("{", r.indexOf("{") + 1);
+                int end = r.lastIndexOf("}");
+                String jsonResponse = r.substring(start, end);
                 table = new JSONObject(jsonResponse);
-            } catch (JSONException e) {
+            } catch (Throwable e) {
+                success = false;
+                msg = e.getLocalizedMessage();
                 e.printStackTrace();
             }
-            Fragment newFragment = (success ? new MainFragment(table,getActivity()) : new TextFragment(msg));
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            // Замена контейнер в разметке на фрагмент
-            transaction.replace(R.id.container, newFragment);
-            // выполнение транзакции
-            transaction.commit();
+            if (success) {
+                Fragment newFragment = new MainFragment(table, getActivity());
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                // Замена контейнер в разметке на фрагмент
+                transaction.replace(R.id.container, newFragment);
+                // выполнение транзакции
+                transaction.commit();
+            } else {
+                 DialogFragment newFragment = new ErrorFragment(msg);
+                 newFragment.show(getParentFragmentManager(), "Error happened :c");
+            }
         }
 
     }

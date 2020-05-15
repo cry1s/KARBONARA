@@ -1,29 +1,10 @@
 package com.karbonara.karbonara;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
-import com.karbonara.karbonara.ui.main.AnimeAdapter;
-import com.karbonara.karbonara.ui.main.LoadingFragment;
-import com.karbonara.karbonara.ui.main.MainFragment;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import com.karbonara.karbonara.ui.main.fragments.LoadingFragment;
 
 public class MainActivity extends AppCompatActivity {
 

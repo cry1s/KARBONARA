@@ -1,32 +1,23 @@
-package com.karbonara.karbonara.ui.main;
+package com.karbonara.karbonara.ui.main.adapters;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.media.Image;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.karbonara.karbonara.Anime;
-import com.karbonara.karbonara.MainActivity;
 import com.karbonara.karbonara.R;
+import com.karbonara.karbonara.ui.main.fragments.AnimeFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import static com.karbonara.karbonara.ui.main.MainFragment.table;
 
 public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder>{
     private ArrayList<Anime> android_versions;
@@ -53,7 +44,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder>{
         final Anime anime = android_versions.get(i);
 
         viewHolder.title.setText(anime.titleRus);
-        viewHolder.description.setText(anime.description);
+        viewHolder.description.setText(anime.getShortDescription());
         viewHolder.status.setText(anime.readyStatus);
 
         Picasso.with(context)
@@ -85,16 +76,11 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder>{
 
         @Override
         public void onClick(View v) {
-           // Fragment newFragment = new AnimeFragment(android_versions.get(getAdapterPosition()));
-          //  FragmentTransaction transaction = beginTransaction(); //!!!!!!!!!!!!!!!!
-            // Замена контейнер в разметке на фрагмент
-         //   transaction.replace(R.id.container, newFragment);
-            // выполнение транзакции
-          //  transaction.commit();
-
-            Fragment newFragment = new AnimeFragment();
-            fragmentManager.beginTransaction().replace(R.id.container, newFragment).commit();
-
+            Fragment newFragment = new AnimeFragment(android_versions.get(getAdapterPosition()));
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, newFragment)
+                    .addToBackStack(null)
+                    .commit();
         }
 
     }
