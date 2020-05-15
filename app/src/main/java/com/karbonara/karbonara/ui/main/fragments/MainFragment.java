@@ -55,7 +55,6 @@ public class MainFragment extends Fragment {
         ArrayList images = new ArrayList(Arrays.asList(makeAnime()));
         AnimeAdapter adapter = new AnimeAdapter(getContext().getApplicationContext(), images, getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
-        RecyclerView rv = view.findViewById(R.id.animeRecView);
 
         Log.i("AAAAAAAAAAAAAAAAAAAA", "OnCreateViewDone");
         return view;
