@@ -86,7 +86,7 @@ public class MainFragment extends Fragment {
                         k.getJSONObject(11).getString("v")
                         );
                 arr[i] = anime;
-                System.out.println(anime.getTitle());
+                Log.i("ANIME SUCCESSFUL", anime.getTitle());
             }
             return arr;
         } catch (JSONException e) {

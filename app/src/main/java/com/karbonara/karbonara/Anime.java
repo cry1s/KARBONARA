@@ -1,6 +1,5 @@
 package com.karbonara.karbonara;
 
-
 public class Anime {
     public String poster;
     public String posterHor;
@@ -32,8 +31,8 @@ public class Anime {
         this.poster = poster;
         this.posterHor = posterHor;
         switch (statusSerii) {
-            case "P":
-                this.statusSerii = "";
+            case "Р":
+                this.statusSerii = "сериал выпущен";
                 break;
             case "О":
                 this.statusSerii = "На озвучке";
